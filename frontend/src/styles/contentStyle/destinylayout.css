@@ -1,0 +1,194 @@
+.destinylayout-main-container {
+    height: auto;
+    position: relative;
+    top: -80px;
+    width: 100%;
+    background-color: #03001C;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+#relative-places-h3 {
+    width: 85%;
+    height: 80px;
+    font-size: 30px;
+    align-items: center;
+    justify-content: center;
+    color: #626060;
+}
+
+#relative-places-h3>h3 {
+    border-left: 10px solid rgb(16, 198, 239);
+    padding-left: 20px;
+}
+
+.destinylayout-header-container,
+.section-container-destinylayout-related-pic {
+    height: auto;
+    width: 85%;
+    display: flex;
+    gap: 10px;
+}
+
+.destinylayout-header-container {
+    margin-top: 100px;
+}
+
+.related-pic {
+    height: 200px;
+    cursor: pointer;
+    background-color: aliceblue;
+    filter: brightness(.9);
+}
+
+.related-pic:hover {
+    height: 198px;
+    border: 1px solid #41d8bf;
+}
+
+.section-container-destinylayout {
+    columns: 500px 3;
+}
+
+.relative-places-continer {
+    height: 300px;
+    width: 100%;
+    background-color: aliceblue;
+    margin: 10px;
+    background-color: rgba(240, 255, 255, 0.752);
+}
+
+.main-photo-container,
+.about-photo-container {
+    height: 600px;
+    background-color: rgb(3, 30, 53);
+}
+
+.about-photo-container {
+    display: flex;
+    flex-direction: column;
+    width: 400px;
+    border: 1px solid #41d8bf;
+    border-radius: 10px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.about-photo-container p {
+    font-size: large;
+    margin: 10px 20px;
+    color: #FFFFFF;
+}
+
+.main-photo-container {
+    width: 1200px;
+}
+
+#destinylayoutfooter {
+    height: 100px;
+    width: 100%;
+    color: #606060;
+    position: static;
+    background-color: #626060;
+    bottom: 0px;
+}
+
+.more-info-about-place-container {
+    border-radius: 10px;
+    background-color: #04011d;
+    display: flex;
+    height: fit-content;
+    width: 85%;
+    border: 1px solid #41d8bf;
+    font-size: large;
+}
+
+.more-info-about-place-container p {
+    color: #FFFFFF;
+    margin: 50px;
+    letter-spacing: 1px;
+}
+
+img {
+    object-fit: fill;
+    height: 100%;
+    width: 100%;
+    filter: brightness(1.3);
+}
+
+.related-pic img.active {
+    border: 2px solid #007BFF;
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+
+    .destinylayout-header-container,
+    .section-container-destinylayout-related-pic {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .related-pic {
+        width: 100%;
+        height: auto;
+    }
+
+    .main-photo-container {
+        width: 100%;
+        height: auto;
+    }
+
+    .about-photo-container {
+        width: 100%;
+    }
+
+    #relative-places-h3 {
+        font-size: 24px;
+    }
+
+    .more-info-about-place-container {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .more-info-about-place-container p {
+        margin: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    #relative-places-h3 {
+        font-size: 20px;
+    }
+
+    .about-photo-container p {
+        font-size: medium;
+        margin: 10px;
+    }
+
+    .related-pic {
+        width: 100%;
+        height: 150px;
+    }
+
+    .main-photo-container,
+    .about-photo-container {
+        height: auto;
+    }
+
+    #destinylayoutfooter {
+        height: 80px;
+    }
+    
+    .more-info-about-place-container {
+        height: auto;
+        font-size: medium;
+        padding: 10px;
+    }
+}

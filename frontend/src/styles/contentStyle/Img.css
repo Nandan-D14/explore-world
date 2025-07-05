@@ -1,0 +1,32 @@
+
+.place_pic {
+    height: 230px;
+    width: 100%;
+    border-radius: 6px;
+    
+}
+
+.tour_imgs {
+    height: auto;
+    width: 100%; 
+    background-color: #F7F7F8;
+}    
+
+.Img-container{
+    height: 300px;
+    width: 400px; 
+    padding: 3px;
+    background: #fff;
+    text-align: center;
+    justify-content: center;
+    overflow: hidden;
+    font-size: 15px;
+    border-radius: 6px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.282);
+    transition: transform 0.3s ease;
+}
+
+.Img-container:hover {
+    
+    transform: scale(1.05);
+}

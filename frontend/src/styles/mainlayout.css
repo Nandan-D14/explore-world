@@ -1,0 +1,129 @@
+.mainlayout-maincontainer {
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  z-index: 10000;
+  backdrop-filter: blur(40px);
+  position: absolute;
+  background-color: rgba(0, 131, 245, 0.492);
+}
+
+.mainlayout-container {
+  position: relative;
+  top: -25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  font-size: 130%;
+  text-align: center;
+  background-color: rgba(240, 248, 255, 0);
+  opacity: .9;
+  animation: 1.5s showContents .1s linear 1 ;
+}
+
+.mainlayout-container > a {
+  height: 50px;
+  width: 150px;
+  border: none;
+  text-align: center;
+  font-size: large;
+  font-weight: 500;
+  color: aliceblue;
+  background: linear-gradient(45deg , orange,rgb(163, 106, 0));
+  border-radius: 20px;
+  cursor: pointer;
+}
+.mainlayout-container > button:hover {
+  box-shadow: 0 0px 50px rgb(255, 184, 53);
+}
+@keyframes showContents {
+  from {
+    opacity: 0;
+    filter: blur(5px);
+  }
+
+  to {
+    opacity: 1;
+    filter: blur(0);
+  }
+
+}
+
+.mailyout-top-container,
+.mailyout-bottom-container,
+.mailyout-left-container,
+.mailyout-right-container {
+  position: absolute;
+  display: flex;
+}
+
+.mailyout-top-container,
+.mailyout-bottom-container {
+  left: 25%;
+  flex-direction: row;
+  top: 0;
+  gap: 40px;
+}
+
+.mailyout-bottom-container {
+  top: 75vh;
+}
+
+.mailyout-left-container,
+.mailyout-right-container {
+  flex-direction: column;
+  position: absolute;
+  top: 150px;
+  gap: 40px;
+}
+
+.mailyout-right-container {
+  right: 0;
+}
+
+.inner-top-mainlayout {
+  height: 200px;
+  width: 200px;
+  color: aliceblue;
+  background-color: rgb(15, 15, 15);
+  position: relative;
+  opacity: 0;
+  border-radius: 20px;
+  transform: rotate(0.2turn);
+  transition: transform .5s;
+  background-image: url("https://wallpapers.com/images/hd/travel-laptop-khrds2g5kakk5xzo.jpg");
+  background-size: cover;background-position-x: -110px;
+  animation: moveup .5s linear 1 forwards;
+}
+
+.inner-top-mainlayout:hover {
+  transform:  translateY(20px);
+}
+
+.all1 {
+  animation-delay: .1s;
+}
+
+.all2 {
+  animation-delay: .2s;
+}
+.all3 {
+  animation-delay: .3s;
+}
+.all4 {
+  animation-delay: .4s;
+}
+@keyframes moveup {
+  0% {
+    top: 100vh;
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+    top: 0;
+  }
+}

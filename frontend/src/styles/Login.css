@@ -1,0 +1,90 @@
+.login-c {
+  height: 90vh;
+  width: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/22/19/33/conifers-1850227_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: whitesmoke;
+  backdrop-filter: blur(10px);
+  height: 300px;
+  background-color: #ffffff1b;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+}
+
+.login-form h1 {
+  text-align: center;
+  color: #1cf051;
+  margin-bottom: 20px;
+}
+
+.login-form input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #ffffff00;
+  border: 1px solid #ccc;
+  border-radius: 60px;
+  font-size: 16px;
+}
+
+.login-form input:focus {
+  border-color: #5ab2ff;
+  outline: none;
+}
+
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 60px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+  background-color: #0056b3;
+}
+
+.error {
+  color: red;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 480px) {
+  .login-form {
+      padding: 20px;
+  }
+
+  .login-form h1 {
+      font-size: 24px;
+  }
+
+  .login-form input,
+  .login-form button {
+      font-size: 14px;
+  }
+}

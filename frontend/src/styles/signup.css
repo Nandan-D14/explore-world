@@ -1,0 +1,88 @@
+.signup-container {
+  padding: 40px;
+  height: 550px;
+  max-width: 450px;
+  font-weight: 700;
+  position: relative;
+  top: 150px;
+  margin: auto;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  background-color: #ffffff1b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.out-up {
+  height: 90vh;
+  width: 100%;
+  background-image: url("https://cdn.pixabay.com/photo/2016/11/22/19/33/conifers-1850227_960_720.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.signup-container label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.signup-container input {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-weight: 600;
+  background-color: #ffffff0a;
+  border: 1px solid #ccc;
+  border-radius: 60px;
+  font-size: 16px;
+}
+
+.signup-container input:focus {
+  border-color: #5ab2ff;
+  outline: none;
+}
+
+.signup-container button {
+  width: 95%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border-radius: 60px;
+  border: none;
+  margin: 10px 0;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.signup-container button:hover {
+  background-color: #0050ff;
+}
+
+.signup-container p {
+  text-align: center;
+  margin-top: 15px;
+  color: #fffafa;
+}
+
+.signup-container p a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.signup-container p a:hover {
+  text-decoration: underline;
+}
