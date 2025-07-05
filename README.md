@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🌍 Tourist Project - Enhanced Travel Discovery Platform
 
 A modern, full-stack web application for discovering and exploring amazing travel destinations around the world. Built with React.js frontend and Node.js/Express backend with MongoDB database.
@@ -254,3 +255,7 @@ For support, email your-email@example.com or create an issue in the repository.
 ---
 
 **Happy Traveling! 🌟**
+=======
+# explore-world
+tourist places information website 
+>>>>>>> f36eadb9b3a46913d388782f6478099f67b125cc
