@@ -10,7 +10,6 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const filterGenuse = "Histor";
 
   useEffect(() => {
     const fetchPlaces = async () => {

@@ -8,7 +8,7 @@ const FavoritesPage = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/favorites", {
+        const response = await axios.get(process.env.REACT_APP_API_URL, {
           params: { userId: "currentUserId" } 
         });
         setFavorites(response.data);
