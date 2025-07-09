@@ -24,6 +24,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:prod": "cross-env REACT_APP_API_URL=https://explore-world-backend.onrender.com react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prestart": "set NODE_OPTIONS=--openssl-legacy-provider && react-scripts start"
