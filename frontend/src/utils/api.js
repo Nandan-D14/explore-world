@@ -2,6 +2,8 @@ import axios from 'axios';
 
 const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000';
 console.log('API Base URL:', API_BASE_URL);
+console.log('Environment:', process.env.NODE_ENV);
+console.log('All env vars:', Object.keys(process.env).filter(key => key.startsWith('REACT_APP_')));
 
 // Create axios instance
 const api = axios.create({
@@ -63,8 +65,15 @@ api.interceptors.response.use(
 
 // API methods
 export const authAPI = {
-  login: (credentials) => api.post('/login', credentials),
-  signup: (userData) => api.post('/signup', userData),
+  login: (credentials) => {
+    console.log('Making login request to:', `${API_BASE_URL}/login`);
+    return api.post('/login', credentials);
+  },
+  signup: (userData) => {
+    console.log('Making signup request to:', `${API_BASE_URL}/signup`);
+    console.log('Signup data:', { ...userData, password: '[REDACTED]' });
+    return api.post('/signup', userData);
+  },
   logout: () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('refreshToken');

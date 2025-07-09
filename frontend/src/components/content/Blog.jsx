@@ -14,17 +14,22 @@ const Blogs = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch(`http://localhost:4000/places`)
-      .then((response) => {
+    const fetchPlaces = async () => {
+      try {
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+        console.log('Blog - Fetching from:', `${apiUrl}/places`);
+        const response = await fetch(`${apiUrl}/places`);
         if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then((data) => {
+        const data = await response.json();
         setSearchData(data);
         setFilteredData(data);
         setLoading(true);
-      })
-      .catch((error) => console.error("Error fetching places:", error));
+      } catch (error) {
+        console.error("Error fetching places:", error);
+      }
+    };
+    
+    fetchPlaces();
   }, []);
 
   const handleCardClick = (place) => {
