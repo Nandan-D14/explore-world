@@ -32,13 +32,42 @@ app.use(limiter);
 
 // CORS configuration
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production' 
-    ? ['https://your-frontend-domain.com'] 
-    : ['http://localhost:3000', 'http://localhost:3001', 'http://localhost:3002'],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc.)
+    if (!origin) return callback(null, true);
+    
+    // Allow all vercel.app domains and localhost for development
+    if (origin.includes('vercel.app') || origin.includes('localhost')) {
+      console.log('CORS allowing origin:', origin);
+      return callback(null, true);
+    }
+    
+    // Additional specific domains if needed
+    const allowedOrigins = [
+      'https://explpore-world.vercel.app',
+      'https://tourist-project-frontend.vercel.app',
+      'https://explore-world-frontend.vercel.app',
+      process.env.FRONTEND_URL
+    ].filter(Boolean);
+    
+    if (allowedOrigins.includes(origin)) {
+      console.log('CORS allowing specific origin:', origin);
+      return callback(null, true);
+    }
+    
+    console.log('CORS blocked origin:', origin);
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
-  optionsSuccessStatus: 200
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'x-csrf-token', 'Accept', 'Origin', 'X-Requested-With'],
+  preflightContinue: false
 };
 app.use(cors(corsOptions));
+
+// Handle preflight requests for all routes
+app.options('*', cors(corsOptions));
 
 // Body parsing middleware
 app.use(express.json({ limit: '10mb' }));
@@ -413,8 +442,54 @@ app.get("/places", async (req, res) => {
   }
 });
 
+// Health check endpoint
+app.get("/", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Tourist Project Backend API is running",
+    version: "1.0.0",
+    timestamp: new Date().toISOString()
+  });
+});
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is healthy",
+    uptime: process.uptime(),
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error('Error:', err.message);
+  if (err.message === 'Not allowed by CORS') {
+    return res.status(403).json({
+      success: false,
+      message: 'CORS error: Origin not allowed',
+      origin: req.headers.origin
+    });
+  }
+  res.status(500).json({
+    success: false,
+    message: 'Internal server error',
+    error: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
+});
+
+// Handle 404 routes
+app.use('*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+    path: req.originalUrl
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
 });
 
 
