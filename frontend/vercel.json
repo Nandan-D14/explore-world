@@ -1,0 +1,18 @@
+{
+  "env": {
+    "REACT_APP_API_URL": "https://explore-world-backend.onrender.com",
+    "REACT_APP_ENVIRONMENT": "production"
+  },
+  "build": {
+    "env": {
+      "REACT_APP_API_URL": "https://explore-world-backend.onrender.com",
+      "REACT_APP_ENVIRONMENT": "production"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
