@@ -87,7 +87,9 @@ const connectDB = async () => {
   }
 };
 
-connectDB();
+if (require.main === module) {
+  connectDB();
+}
 
 // Enhanced Schemas with validation and timestamps
 const myfavSchema = new mongoose.Schema({
@@ -398,16 +400,17 @@ app.post("/create", async (request, response) => {
   }
 });
 
-app.post("/favorites", async (request, response) => {
+app.post("/favorites", authenticate, async (request, response) => {
   try {
     const { placeName, genuse, image1, countryName, stateName } = request.body;
 
-    const existingPlace = await Myfav.findOne({ placeName });
+    const existingPlace = await Myfav.findOne({ placeName, userId: request.user.id });
     if (existingPlace) {
       return response.status(400).send("Place already exists in favorites.");
     }
 
     const myfav = new Myfav({
+      userId: request.user.id,
       placeName,
       genuse,
       image1,
@@ -487,9 +490,13 @@ app.use('*', (req, res) => {
   });
 });
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-});
+if (require.main === module) {
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+    console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  });
+}
+
+module.exports = app;
 
 
