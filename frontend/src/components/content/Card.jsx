@@ -1,31 +1,31 @@
-import React from 'react';
-// import axios from 'axios';
+import React, { useState } from 'react';
+import axios from 'axios';
 import '../../styles/contentStyle/card.css';
 
 const Card = ({ destination, genuse, info, image, onClick, myfavdata }) => {
-  // const [isFavorite, setIsFavorite] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
 
-  // const handleHeart = async (event) => {
-  //   event.stopPropagation(); 
-  //   const newFav = !isFavorite;
-  //   setIsFavorite(newFav); 
+  const handleHeart = async (event) => {
+    event.stopPropagation();
+    const newFav = !isFavorite;
+    setIsFavorite(newFav);
 
-  //   const updatedFavData = {
-  //     ...myfavdata,
-  //     isFavorite: newFav, 
-  //   };
+    const updatedFavData = {
+      ...myfavdata,
+      isFavorite: newFav,
+    };
 
-  //   try {
-  //     const response = await axios.post('http://localhost:4000/favorites', updatedFavData);
-  //     console.log('Favorite added:', response.data);
-  //   } catch (error) {
-  //     console.error('Error adding favorite:', error);
-  //   }
-  // };
+    try {
+      const response = await axios.post('http://localhost:4000/favorites', updatedFavData);
+      console.log('Favorite added:', response.data);
+    } catch (error) {
+      console.error('Error adding favorite:', error);
+    }
+  };
 
   return (
     <div className="card-container" onClick={onClick}>
-      {/* <div className="svg">
+      <div className="svg">
         <svg
           className="w-[43px] h-[43px] text-gray-800 dark:text-white"
           onClick={handleHeart}
@@ -44,7 +44,7 @@ const Card = ({ destination, genuse, info, image, onClick, myfavdata }) => {
             d="M12.01 6.001C6.5 1 1 8 5.782 13.001L12.011 20l6.23-7C23 8 17.5 1 12.01 6.002Z"
           />
         </svg>
-      </div> */}
+      </div>
 
       <img
         alt={`img of ${destination} - ${genuse}`}

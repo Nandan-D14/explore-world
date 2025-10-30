@@ -1,68 +1,100 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/profile.css';
-import Loader from "./content/Loder";
 
-function Profile() {
+const Profile = () => {
   const [user, setUser] = useState(null);
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate();
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem("token");
-      if (!token) return navigate("/login");
-
       try {
-        const response = await axios.get("http://localhost:4000/profile", {
-          headers: { Authorization: `Bearer ${token}` },
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token found');
+        }
+
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+        const response = await axios.get(`${apiUrl}/profile`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
         setUser(response.data);
       } catch (error) {
-        alert("Session expired. Please login again.");
-        navigate("/login");
-      } finally {
-        setLoading(false);
+        setError('Failed to fetch profile');
       }
     };
-    fetchProfile();
-  }, [navigate]);
 
-  return loading ? (
-    <Loader />
-  ) : user ? (
-    <div className="profile-outer-continer">
-      <div className="profile-container">
-        <div className="profile-header">
-          <h1>My Profile</h1>
+    const fetchFavorites = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          throw new Error('No token found');
+        }
+
+        const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:4000';
+        const response = await axios.get(`${apiUrl}/favorites`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setFavorites(response.data);
+      } catch (error) {
+        setError('Failed to fetch favorites');
+      }
+    };
+
+    const fetchData = async () => {
+      setLoading(true);
+      await Promise.all([fetchProfile(), fetchFavorites()]);
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return <div className="loading-spinner"></div>;
+  }
+
+  if (error) {
+    return <p className="error-message">{error}</p>;
+  }
+
+  return (
+    <div className="profile-container">
+      <h1>Profile</h1>
+      {user && (
+        <div className="profile-info">
+          <p>
+            <strong>Username:</strong> {user.username}
+          </p>
+          <p>
+            <strong>Email:</strong> {user.email}
+          </p>
         </div>
-        <div className="profile-img-container">
-        <img
-          src="https://via.placeholder.com/150"
-          alt="About Us"
-          className="profile-img"
-        />
-        </div>
-        <div className="profile-details">
-        <h3><strong>Name:</strong> {user.username.toUpperCase()}</h3>
-          <h3><strong>Email :  </strong> {user.email}</h3>
-          {/* <h2>Your Posts</h2>
-          <ul>
-            {user.posts && user.posts.length > 0 ? (
-              user.posts.map(post => (
-                <li key={post.id}>{post.title}</li>
-              ))
-            ) : (
-              <p>No posts available.</p>
-            )}
-          </ul> */}
-        </div>
+      )}
+      <h2>My Favorites</h2>
+      <div className="favorites-list">
+        {favorites.length > 0 ? (
+          favorites.map((fav) => (
+            <div key={fav._id} className="favorite-card">
+              <img src={fav.image1} alt={fav.placeName} />
+              <h3>{fav.placeName}</h3>
+              <p>
+                {fav.stateName}, {fav.countryName}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p>You have no favorites yet.</p>
+        )}
       </div>
     </div>
-  ) : (
-    <p className="error">Error loading profile. Please try again.</p>
   );
-}
+};
 
 export default Profile;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "../styles/home2.css";
+import "../styles/loading.css";
 import Card from '../components/content/Card.jsx';
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "./content/Footer.jsx";
@@ -42,20 +43,36 @@ function Home() {
     });
   };
 
+  const renderHeader = () => (
+    <div className="home-front-img-container">
+      <img src="https://wallpaperaccess.com/full/1431622.jpg" alt="Travel Banner" />
+      <div className="search-container">
+        <div className="show-text-container">
+          <h6>EXPLORE WORLD</h6>
+          <h1>Unveiling Wonders, Crafting Memories</h1>
+        </div>
+        <div className="show-img-continer">
+          <div className="in-main-img-home2">
+            <img src="https://img.freepik.com/premium-photo/festival-colors-india-celebration-spring-holiday-holi_124507-100644.jpg" alt="" />
+          </div>
+          <div className="in-main-img-home2">
+            <img src="https://4kwallpapers.com/images/wallpapers/lantern-festival-chinese-new-year-china-lanterns-night-5k-2048x2048-4772.jpg" alt="" />
+          </div>
+          <div className="in-main-img-home2">
+            <img src="https://img.freepik.com/premium-photo/fireworks-festival-hd-8k-wallpaper-stock-photographic-image_915071-82737.jpg" alt=""/>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   if (loading) {
     return (
       <>
         <div id="home-container">
-          <div className="home-front-img-container">
-            <img src="https://wallpaperaccess.com/full/1431622.jpg" alt="Travel Banner" />
-            <div className="search-container">
-              <div className="show-text-container">
-                <h6>EXPLORE WORLD</h6>
-                <h1>Unveiling Wonders, Crafting Memories</h1>
-              </div>
-            </div>
-          </div>
-          <div style={{padding: '50px', textAlign: 'center'}}>
+          {renderHeader()}
+          <div className="status-message">
+            <div className="loading-spinner"></div>
             <h2>Loading amazing destinations...</h2>
           </div>
         </div>
@@ -68,18 +85,10 @@ function Home() {
     return (
       <>
         <div id="home-container">
-          <div className="home-front-img-container">
-            <img src="https://wallpaperaccess.com/full/1431622.jpg" alt="Travel Banner" />
-            <div className="search-container">
-              <div className="show-text-container">
-                <h6>EXPLORE WORLD</h6>
-                <h1>Unveiling Wonders, Crafting Memories</h1>
-              </div>
-            </div>
-          </div>
-          <div style={{padding: '50px', textAlign: 'center'}}>
-            <p style={{color: 'red', fontSize: '18px'}}>{error}</p>
-            <button onClick={() => window.location.reload()} style={{padding: '10px 20px', fontSize: '16px'}}>
+          {renderHeader()}
+          <div className="status-message">
+            <p className="error-message">{error}</p>
+            <button onClick={() => window.location.reload()} className="cta-button">
               Try Again
             </button>
           </div>
@@ -92,34 +101,11 @@ function Home() {
   return (
     <>
       <div id="home-container">
-        <div className="home-front-img-container">
-          <img src="https://wallpaperaccess.com/full/1431622.jpg" alt="Travel Banner" />
-           {/* https://wallpaper.dog/large/20400109.jpg */}
-          <div className="search-container">
-            <div className="show-text-container">
-              <h6>EXPLORE WORLD</h6>
-              <h1>Unveiling Wonders, Crafting Memories</h1>
-              {/* <p>
-                Discover inspiring destinations, create unforgettable memories, and travel with confidence - adventure starts here.
-              </p> */}
-            </div>
-            <div className="show-img-continer">
-              <div className="in-main-img-home2">
-                <img src="https://img.freepik.com/premium-photo/festival-colors-india-celebration-spring-holiday-holi_124507-100644.jpg" alt="" />
-              </div>
-              <div className="in-main-img-home2">
-                <img src="https://4kwallpapers.com/images/wallpapers/lantern-festival-chinese-new-year-china-lanterns-night-5k-2048x2048-4772.jpg" alt="" />
-              </div>
-              <div className="in-main-img-home2">
-                <img src="https://img.freepik.com/premium-photo/fireworks-festival-hd-8k-wallpaper-stock-photographic-image_915071-82737.jpg" alt=""/>
-              </div>
-            </div>
-          </div>
-        </div>
+        {renderHeader()}
         <h1 className="top-destination-title">All Destinations ({searchData.length} countries found)</h1>
         <div className="top-destination-container">
           {searchData.length === 0 ? (
-            <div style={{padding: '20px', textAlign: 'center'}}>
+            <div className="status-message">
               <p>No destinations found. Check console for errors.</p>
             </div>
           ) : (
@@ -133,6 +119,13 @@ function Home() {
                     info={`${state.stateName}, ${country.countryName}`}
                     image={place.image1}
                     onClick={() => handleCardClick(place)}
+                    myfavdata={{
+                      placeName: place.placeName,
+                      genuse: place.genuse,
+                      image1: place.image1,
+                      countryName: country.countryName,
+                      stateName: state.stateName,
+                    }}
                   />
                 ))
               )
